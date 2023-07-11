@@ -1,0 +1,59 @@
+.calendar-wrapper {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+
+    .week-row-wrapper {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        background: black;
+        color: white;
+        margin: 10px 0 1px;
+
+        .weekday {
+            min-height: 35px;
+            padding: 12px;
+            text-align: center;
+        }
+    }
+
+    .day {
+        border-bottom: 1px solid black;
+        border-right: 1px solid black;
+        padding: 12px 24px;
+        letter-spacing: 1px;
+        font-size: 12px;
+        box-sizing: border-box;
+        color: black;
+        position: relative;
+        pointer-events: none;
+        min-height: 125px;
+        cursor: pointer;
+
+        &.today {
+            background: #CCCCCC;
+        }
+
+        &.first-day {
+            border-left: 1px solid black;
+        }
+
+        &.sunday {
+            color: red;
+        }
+
+        &.disabled {
+            cursor: not-allowed;
+        }
+
+        &-name {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #99a1a7;
+            text-align: center;
+            border-bottom: 1px solid rgba(166, 168, 179, 0.12);
+            line-height: 50px;
+            font-weight: 500;
+        }
+    }
+}

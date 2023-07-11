@@ -55,7 +55,7 @@ const Header = ({month, year, days, addSchedule, setLoading}) => {
                         errors,
                         submitForm
                     }) => {
-                        return <Form autoComplete="off">
+                        return <Form onSubmit={handleSubmit} autoComplete="off">
                             <div className="form-controller">
                                 <div className="label">
                                     <p type="secondary">Event Title</p>
@@ -101,7 +101,7 @@ const Header = ({month, year, days, addSchedule, setLoading}) => {
                             <div className="button-wrapper">
                                 <Button
                                     type="primary"
-                                    onClick={submitForm}
+                                    htmlType="submit"
                                     disabled={
                                         isSubmitting ||
                                         Object.keys(errors).length > 0 ||

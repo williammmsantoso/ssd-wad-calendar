@@ -28,8 +28,7 @@ const CalendarLayout = () => {
     const addSchedule = (values) => {
         setSchedules((prevState) => {
             let newArr = [...prevState];
-            let data = _.get(newArr[values.date - 1], 'data');
-            if (data.length >= 3) {
+            if (_.get(newArr[values.date - 1], 'data.length') >= 3) {
                 toast.error('Sorry, on the day you choose the schedule is full', {
                     toastId: '14',
                 });
@@ -42,11 +41,11 @@ const CalendarLayout = () => {
             return newArr;
         });
 
+        setLoading(false);
+
         toast.success('Congratulation! You have successfully created a schedule', {
             toastId: '14',
         });
-
-        setLoading(false);
     }
 
     useEffect(() => {
@@ -58,7 +57,6 @@ const CalendarLayout = () => {
         } else if (tempSchedule && tempSchedule.length > 0) {
             setSchedules(tempSchedule);
         }
-
     }, []);
 
     return <div className="calendar-wrapper">

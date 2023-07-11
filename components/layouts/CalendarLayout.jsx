@@ -26,6 +26,7 @@ const CalendarLayout = () => {
     }
 
     const addSchedule = (values) => {
+        console.log('a');
         setSchedules((prevState) => {
             let newArr = [...prevState];
             if (_.get(newArr[values.date - 1], 'data.length') >= 3) {

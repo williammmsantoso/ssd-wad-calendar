@@ -2,22 +2,15 @@
     display: grid;
     grid-template-columns: repeat(7, 1fr);
 
-    .week-row-wrapper {
-        grid-column: 1 / -1;
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
+    .weekday {
+        min-height: 35px;
+        padding: 12px;
+        text-align: center;
         background: black;
         color: white;
-        margin: 10px 0 1px;
-
-        .weekday {
-            min-height: 35px;
-            padding: 12px;
-            text-align: center;
-        }
     }
 
-    .day {
+    .day-wrapper {
         border-bottom: 1px solid black;
         border-right: 1px solid black;
         padding: 12px 24px;
@@ -29,6 +22,7 @@
         pointer-events: none;
         min-height: 125px;
         cursor: pointer;
+        z-index: 5;
 
         &.today {
             background: #CCCCCC;
@@ -60,6 +54,26 @@
             padding: 12px;
             margin: 8px 0;
             color: white;
+            position: relative;
+
+            .icon-wrapper {
+                position: absolute;
+                right: 4px;
+                top: 4px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .icon {
+                    object-fit: contain;
+                    cursor: pointer;
+                    width: 20px;
+
+                    &.delete {
+                        margin-right: 4px;
+                    }
+                }
+            }
         }
     }
 }

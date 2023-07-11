@@ -4,7 +4,7 @@ import Headers from '../Headers';
 import WeekOfDays from '../WeekOfDays';
 import DaysOfMonth from '../DaysOfMonth';
 import { daysInMonth } from '../../helpers/date';
-import Loader from "../Loader";
+import { toast } from 'react-toastify';
 import _ from "lodash";
 
 const CalendarLayout = () => {
@@ -28,12 +28,22 @@ const CalendarLayout = () => {
     const addSchedule = (values) => {
         setSchedules((prevState) => {
             let newArr = [...prevState];
-
-            _.get(newArr[values.date - 1], 'data').push(values);
+            let data = _.get(newArr[values.date - 1], 'data');
+            if (data.length >= 3) {
+                toast.error('Sorry, on the day you choose the schedule is full', {
+                    toastId: '14',
+                });
+            } else {
+                _.get(newArr[values.date - 1], 'data').push(values);
+            }
             
             localStorage.setItem('schedules', JSON.stringify(newArr));
 
             return newArr;
+        });
+
+        toast.success('Congratulation! You have successfully created a schedule', {
+            toastId: '14',
         });
 
         setLoading(false);
@@ -43,7 +53,7 @@ const CalendarLayout = () => {
         const tempMonth = localStorage.getItem('localMonth');
         const tempSchedule = JSON.parse(localStorage.getItem('schedules'));
 
-        if (!tempMonth || tempMonth !== currentMonth) {
+        if (parseInt(tempMonth) !== parseInt(currentMonth)) {
             resetSchedule();
         } else if (tempSchedule && tempSchedule.length > 0) {
             setSchedules(tempSchedule);

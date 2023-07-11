@@ -2,6 +2,7 @@ import { firstDayOfMonth } from "../helpers/date";
 import React from "react";
 import Loader from "./Loader";
 import _ from "lodash";
+import { getRandomColor } from "../helpers/color";
 
 const DaysOfMonth = ({days, month, now, schedules, loading}) => {
     const mappingDays = Array.from({ length: days }, (k, v) => v + 1);
@@ -30,9 +31,11 @@ const DaysOfMonth = ({days, month, now, schedules, loading}) => {
             >
               <span>{item.id}</span>
               {
-                item.data && item.data.length > 0 && item.data.map((schedule) => {
-                  return <div key={i+100}>
-                    <p>{item.title}</p>
+                item.data && item.data.length > 0 && item.data.map((schedule, idx) => {
+                  return <div key={idx+100} className="schedules-wrapper" style={{ background: `#${getRandomColor()}` }}>
+                    <p>{schedule.title}</p>
+                    <p>{schedule.email}</p>
+                    <p>{schedule.time}</p>
                   </div>
                 })
               }

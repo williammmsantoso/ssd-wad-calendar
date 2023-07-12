@@ -4,16 +4,12 @@ import { Form, Formik } from 'formik';
 import { addEventValidator } from "../helpers/validator";
 import { Button, DatePicker, Input, Modal, Select } from "antd";
 
-const Header = ({month, year, days, addSchedule, setLoading}) => {
+const Header = ({month, year, days, addSchedule, setLoading, resetSchedule}) => {
     const [open, setOpen] = useState(false);
+    const [openConfirmation, setOpenConfirmation] = useState(false);
 
     const initialValues = {};
     const options = Array.from({ length: days } , (itm, idx) => ({ value: idx + 1, label: idx + 1 }))
-
-
-    const handleOpen = (i) => {
-        setOpen(true);
-    };
 
     const handleClose = () => setOpen(false);
 
@@ -27,11 +23,12 @@ const Header = ({month, year, days, addSchedule, setLoading}) => {
             </div>
 
             <div className="add-event-wrapper">
-                <Button variant="contained" onClick={() => handleOpen()}>Add Event</Button>
+                <Button variant="contained" onClick={() => setOpen(true)}>Add Event</Button>
+                <Button type="primary" danger onClick={() => setOpenConfirmation(true)} >Reset Event</Button>
             </div>
 
             <Modal
-                title="Basic Modal"
+                title="Add Event"
                 open={open}
                 onOk={handleClose}
                 onCancel={handleClose}
@@ -114,6 +111,18 @@ const Header = ({month, year, days, addSchedule, setLoading}) => {
                         </Form>
                     }}
                 </Formik>
+            </Modal>
+
+            <Modal
+                title="Delete"
+                open={openConfirmation}
+                onOk={() => {
+                    resetSchedule();
+                    setOpenConfirmation(false);
+                }}
+                onCancel={() => setOpenConfirmation(false)}
+            >
+                <p>Are you sure want to reset all event?</p>
             </Modal>
 
         </div>

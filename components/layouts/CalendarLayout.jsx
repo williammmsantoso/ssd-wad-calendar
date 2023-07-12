@@ -67,6 +67,7 @@ const CalendarLayout = () => {
             days={days}
             addSchedule={addSchedule}
             setLoading={setLoading}
+            resetSchedule={resetSchedule}
         />}
 
         <WeekOfDays/>
